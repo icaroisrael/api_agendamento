@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require("./conexao");
-const Aula = db.define('aula', {
+const Turma = db.define('turma', {
     codigo:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -13,10 +13,10 @@ const Aula = db.define('aula', {
     }   
 },{
     timestamps: true,
-    tableName: 'aula',
+    tableName: 'turma',
   }
 );
 
 //Cria a tabela
-Aula.sync({alter:true});
-module.exports = Aula;
+Turma.sync({alter:true});
+module.exports = Turma;

@@ -11,7 +11,11 @@ const Equipamento = db.define('equipamento', {
         type: Sequelize.TEXT,
         allowNull: false,
     }   
-})
+},{
+    timestamps: true,
+    tableName: 'equipamento',
+  },
+)
 
 //Cria a tabela
 Equipamento.sync({alter:true});

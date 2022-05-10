@@ -4,8 +4,9 @@ app.use(express.json())
 var con = require('./conexao')
 var Equipamento = require('./Equipamento')
 var Aula = require('./Aula')
-
-
+var Professor = require('./Professor')
+var Turma = require('./Turma')
+//var Agendamento = require('./Agendamento')
 
 
 //GETS
@@ -22,6 +23,16 @@ app.get('/equipamentos', async (req, res) =>{
     
 })
 
+app.get('/turma', async (req, res) =>{
+    try {
+        const turma = await Turma.findAll();
+        return res.status(200).json(turma)
+    } catch{
+
+    }
+    
+})
+
 app.get('/aulas', async (req, res) =>{
     try {
         const aula = await Aula.findAll();
@@ -31,14 +42,50 @@ app.get('/aulas', async (req, res) =>{
     }
     
 })
+app.get('/professores', async (req, res) =>{
+    try {
+        const professor = await Professor.findAll();
+        return res.status(200).json(professor)
+    } catch{
 
-app.get('/professores', (req, res) =>{
-    res.send("professores")
+    }    
+})
+
+app.post('/professores', async (req, res) =>{
+    await Professor.create(req.body)
+        .then(() => {
+            return res.status(200).json({
+                erro: false,
+                mensagem: "Cadastro realizado com sucesso"
+            })
+        }).catch(()=>{
+            return res.status(400).json({
+                erro: true,
+                mensagem: "Erro ao cadastrar Usuário"
+            });
+})
+
 })
 
 //POSTS
 app.post('/equipamentos', async (req, res) =>{
     await Equipamento.create(req.body)
+        .then(() => {
+            return res.status(200).json({
+                erro: false,
+                mensagem: "Cadastro realizado com sucesso"
+            })
+        }).catch(()=>{
+            return res.status(400).json({
+                erro: true,
+                mensagem: "Erro ao cadastrar Usuário"
+            });
+})
+
+})
+
+app.post('/turma', async (req, res) =>{
+    await Turma.create(req.body)
         .then(() => {
             return res.status(200).json({
                 erro: false,
@@ -69,4 +116,4 @@ app.post('/aulas', async (req, res) =>{
 
 })
 
-app.listen(3000, () => {console.log("servidor ligado")})
+app.listen(5000, () => {console.log("servidor ligado")})
