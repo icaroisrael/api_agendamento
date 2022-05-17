@@ -7,6 +7,17 @@ var Aula = require('./Aula')
 var Professor = require('./Professor')
 var Turma = require('./Turma')
 var Agendamento = require('./Agendamento')
+const cors = require('cors');
+
+app.use((req, res, next) => {
+	//Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
+    res.header("Access-Control-Allow-Origin", "*");
+	//Quais são os métodos que a conexão pode realizar na API
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+    app.use(cors());
+    next();
+});
+
 var PORT = process.env.PORT || 5000;
 
 
