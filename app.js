@@ -7,6 +7,7 @@ var Aula = require('./Aula')
 var Professor = require('./Professor')
 var Turma = require('./Turma')
 var Agendamento = require('./Agendamento')
+var PORT = process.env.PORT || 5000;
 
 
 //GETS
@@ -141,4 +142,4 @@ app.post('/agendamentos', async (req, res) =>{
 
 })
 
-app.listen(5000, () => {console.log("servidor ligado")})
+app.listen(PORT, () => {console.log("servidor ligado")})
