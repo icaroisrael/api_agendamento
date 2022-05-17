@@ -6,7 +6,7 @@ var Equipamento = require('./Equipamento')
 var Aula = require('./Aula')
 var Professor = require('./Professor')
 var Turma = require('./Turma')
-//var Agendamento = require('./Agendamento')
+var Agendamento = require('./Agendamento')
 
 
 //GETS
@@ -106,6 +106,31 @@ app.post('/aulas', async (req, res) =>{
             return res.status(200).json({
                 erro: false,
                 mensagem: "Cadastro realizado com sucesso"
+            })
+        }).catch(()=>{
+            return res.status(400).json({
+                erro: true,
+                mensagem: "Erro ao cadastrar Usuário"
+            });
+})
+
+})
+
+app.get('/agendamentos', async (req, res) =>{
+    try {
+        const agendamento = await Agendamento.findAll();
+        return res.status(200).json(agendamento)
+    } catch{
+
+    }    
+})
+
+app.post('/agendamentos', async (req, res) =>{
+    await Agendamento.create(req.body)
+        .then(() => {
+            return res.status(200).json({
+                erro: false,
+                mensagem: "Agendamento realizado com sucesso"
             })
         }).catch(()=>{
             return res.status(400).json({
